@@ -3,8 +3,7 @@ var Schema = mongoose.Schema, ObjectId = Schema.Types.ObjectId;
 
 // Bug Fix
 var BugFixSchema = new Schema({
-description:String
+bugfix_description:String
 });
 
 module.exports = mongoose.model('BugFix', BugFixSchema);
-

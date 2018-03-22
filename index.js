@@ -105,6 +105,58 @@ Code.find({}).exec(function(err,code){
 
 
 // Now turning to posting data
+//Posting an API
+app.post('/api/', function(req, res) {
+  var newAPI = new API({
+    api_name:req.body.api_name
+  });
+// TODO link related questions and related API methods
+  newAPI.save(function(err, APIanswer) {
+    if(err) {
+      res.send('error saving API ');
+      console.log(err)
+    } else {
+      console.log(APIanswer);
+      res.send(APIanswer);
+    }
+  });
+});
+
+//Posting a method
+app.post('/method/', function(req, res) {
+  var newMethod = new Method({
+    method_name: req.body.method_name,
+    method_description: req.body.method_description
+  });
+// TODO link related questions and related API methods
+  newMethod.save(function(err, Methodanswer) {
+    if(err) {
+      res.send('error saving method to API ');
+      console.log(err)
+    } else {
+      console.log(Methodanswer);
+      res.send(Methodanswer);
+    }
+  });
+});
+
+
+app.post('/bug/', function(req, res) {
+  var newBug = new Bug({
+  bug_description: req.body.bug_description
+  });
+// TODO link related questions and related API methods
+  newBug.save(function(err, Buganswer) {
+    if(err) {
+      res.send('error saving bug to the API');
+      console.log(err)
+    } else {
+      console.log(Buganswer);
+      res.send(Buganswer);
+    }
+  });
+});
+
 
 app.post('/answer/:id', function(req, res) {
 console.log(req.body);
@@ -116,17 +168,8 @@ console.log(req.body);
     accepted:req.body.accepted,
     votes: req.body.votes
   });
-  // newAnswer.answer_id = ;
-  // newAnswer.creation_date = Date;
-  // newAnswer.extraction_date = Date.now();
-//  newAnswer.body = req.body.bc;
-//  newAnswer.accepted = req.body.accepted;
-//  newAnswer.votes = req.body.votes;
-//  newAnswer.question_id = req.body.question_id;
- // newAnswer.code = req.body.code;
-  //bug_fix and api_recommendation
-
-
+//question_id relation TODO;
+//TODO bug_fix and api_recommendation
   newAnswer.save(function(err, answer) {
     if(err) {
       res.send('error saving answer');
@@ -137,6 +180,57 @@ console.log(req.body);
   });
 });
 
+
+app.post('/code/', function(req, res) {
+  var newCode = new Code({
+  code_content:req.body.code_content,
+  code_description: req.body.code_description,
+  programming_language: req.body.programming_language
+  });
+// TODO link related questions and related API methods
+  newCode.save(function(err, Codeanswer) {
+    if(err) {
+      res.send('error saving code to the API');
+      console.log(err)
+    } else {
+      console.log(Codeanswer);
+      res.send(Codeanswer);
+    }
+  });
+});
+
+app.post('/bugfix/', function(req, res) {
+  var newBugFix = new BugFix({
+  bugfix_description: req.body.bugfix_description
+  });
+// TODO link related questions and related API methods
+  newBugFix.save(function(err, BugFixanswer) {
+    if(err) {
+      res.send('error saving Bug Fix to the API');
+      console.log(err)
+    } else {
+      console.log(BugFixanswer);
+      res.send(BugFixanswer);
+    }
+  });
+});
+
+app.post('/apirecommendation/', function(req, res) {
+  var newAPIRecommendation = new APIRecommendation({
+  apirecommendation_description:req.body.apirecommendation_description,
+  apirecommendation_type: req.body.apirecommendation_type
+  });
+// TODO link related questions and related API methods
+  newAPIRecommendation.save(function(err, newAPIRanswer) {
+    if(err) {
+      res.send('error saving Recommendatio to the API');
+      console.log(err)
+    } else {
+      console.log(newAPIRanswer);
+      res.send(newAPIRanswer);
+    }
+  });
+});
 
 
 
