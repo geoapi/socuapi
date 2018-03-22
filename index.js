@@ -233,6 +233,40 @@ app.post('/apirecommendation/', function(req, res) {
 });
 
 
+// Now we can start updating stuff
+app.put('/apirecommendation/:id', function(req, res){
+var id = req.params.id;
+APIRecommendation.findOne({_id: id},function(err, ObjFound){
+  if (err) {
+    console.log(err);
+    res.status(500).send();
+  } else {
+    if (!ObjFound){
+      res.status(404).send();
+    } else {
+      //check for each property if it is sent then include it in the update
+      if (req.body.apirecommendation_description){
+        ObjFound.apirecommendation_description = req.body.apirecommendation_description;
+      }
+
+      if (req.body.apirecommendation_type){
+        ObjFound.apirecommendation_type = req.body.apirecommendation_type;
+      }
+      //Now finished updating records , it's time to save them!
+      ObjFound.save(function(err, updatedRec){
+        if (err) {
+          console.log(err);
+          res.status(500).send();
+        }else {
+         res.send(updatedRec);
+        }
+      });
+    }
+  }
+ })
+
+});
+
 
 // App listening to port 8080
 app.listen(8080, function(){

@@ -5,7 +5,7 @@ var Schema = mongoose.Schema, ObjectId = Schema.Types.ObjectId;
 var CodeSchema = new Schema({
 code_content: String,
 answer_id:{type:ObjectId, ref:'Answer'},
-description: String,
+code_description: String,
 methods:[{type:ObjectId, ref:'Method'}],
 programming_language:String
 //code_example: {type:ObjectId, ref:'CodeSchema'},
@@ -13,4 +13,3 @@ programming_language:String
 });
 
 module.exports = mongoose.model('Code',CodeSchema);
-

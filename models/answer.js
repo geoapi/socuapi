@@ -11,6 +11,7 @@ creation_date:Date,
 extraction_date:Date,
 question_id:{type:ObjectId, ref:'Question'},
 code:{type:ObjectId, ref:'Code'},
+bug:{type:ObjectId, ref:'Bug'},
 bug_fix:{type:ObjectId, ref:'BugFix'},
 api_recommendation:{type:ObjectId, ref:'APIRecommendation'}
 });

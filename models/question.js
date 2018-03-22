@@ -14,9 +14,8 @@ title:String,
 tags:[String],
 author:String,
 viewed: Number,
-api_id: [{type:ObjectId, ref:'API'}]
+api: [{type:ObjectId, ref:'API'}]
 
 });
 
 module.exports = mongoose.model('Question', QuestionSchema);
-
