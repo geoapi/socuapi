@@ -20,6 +20,10 @@ var Code = require('./models/code');
 
 
 
+//app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 
 /**
 // Requiring all models
@@ -37,8 +41,8 @@ app.get('/questions', function(req,res){
 //res.send('ok');
 Question.find({}).exec(function(err,questions){
      if (err) { throw err;}
-     else {res.json(questions)};   
-     }); 
+     else {res.json(questions)};
+     });
 });
 
 app.get('/answers', function(req,res){
@@ -103,18 +107,25 @@ Code.find({}).exec(function(err,code){
 // Now turning to posting data
 
 app.post('/answer/:id', function(req, res) {
-  
-  var newAnswer = new Answer();
-  newAnswer.answer_id = req.params.id;
-  newAnswer.creation_date = Date.now(); 
-  newAnswer.extraction_date = Date.now();
+console.log(req.body);
+  var newAnswer = new Answer({
+    answer_id:req.params.id,
+    creation_date:Date.now(),
+    extraction_date:Date.now(),
+    body_content:req.body.body_content,
+    accepted:req.body.accepted,
+    votes: req.body.votes
+  });
+  // newAnswer.answer_id = ;
+  // newAnswer.creation_date = Date;
+  // newAnswer.extraction_date = Date.now();
 //  newAnswer.body = req.body.bc;
 //  newAnswer.accepted = req.body.accepted;
 //  newAnswer.votes = req.body.votes;
 //  newAnswer.question_id = req.body.question_id;
  // newAnswer.code = req.body.code;
   //bug_fix and api_recommendation
-   
+
 
   newAnswer.save(function(err, answer) {
     if(err) {
