@@ -264,7 +264,241 @@ APIRecommendation.findOne({_id: id},function(err, ObjFound){
     }
   }
  })
+});
 
+//updating an api name, providing an existing api name and also sending api_name param in the body
+app.put('/api/:name', function(req, res){
+var name = req.params.id;
+API.findOne({api_name: name},function(err, ObjFound){
+  if (err) {
+    console.log(err);
+    res.status(500).send();
+  } else {
+    if (!ObjFound){
+      res.status(404).send();
+    } else {
+      //check for each property if it is sent then include it in the update
+      if (req.body.api_name){
+        ObjFound.api_name = req.body.api_name;
+      }
+      //Now finished updating records , it's time to save them!
+      ObjFound.save(function(err, updatedRec){
+        if (err) {
+          console.log(err);
+          res.status(500).send();
+        }else {
+         res.send(updatedRec);
+        }
+      });
+    }
+  }
+ })
+});
+
+//updating Question body content
+//e.g. http://localhost:8080/questions/5aaf5ceb39b715d61369bfee and send also body key with updated content
+app.put('/question/:qid', function(req, res){
+var qid = req.params.qid;
+Question.findOne({_id: qid},function(err, ObjFound){
+  if (err) {
+    console.log(err);
+    res.status(500).send();
+  } else {
+    if (!ObjFound){
+      res.status(404).send();
+    } else {
+      //check for each property if it is sent then include it in the update
+      if (req.body.body){
+        ObjFound.body = req.body.body;
+      }
+      //title
+      if (req.body.title){
+        ObjFound.title = req.body.title;
+      }
+      //viewed
+      if (req.body.viewed){
+        ObjFound.viewed = req.body.viewed;
+      }
+
+      if (req.body.extraction_date){
+        ObjFound.extraction_date = req.body.extraction_date;
+      }
+
+      ObjFound.save(function(err, updatedRec){
+        if (err) {
+          console.log(err);
+          res.status(500).send();
+        }else {
+         res.send(updatedRec);
+        }
+      });
+
+    }
+  }
+
+ })
+});
+
+
+app.put('/bug/:id', function(req, res){
+var id = req.params.id;
+Bug.findOne({_id: id},function(err, ObjFound){
+  if (err) {
+    console.log(err);
+    res.status(500).send();
+  } else {
+    if (!ObjFound){
+      res.status(404).send();
+    } else {
+      //check for each property if it is sent then include it in the update
+      if (req.body.bug_description){
+        ObjFound.bug_description = req.body.bug_description;
+      }
+
+      ObjFound.save(function(err, updatedRec){
+        if (err) {
+          console.log(err);
+          res.status(500).send();
+        }else {
+         res.send(updatedRec);
+        }
+      });
+
+    }
+  }
+ })
+});
+
+app.put('/bugfix/:id', function(req, res){
+var id = req.params.id;
+BugFix.findOne({_id: id},function(err, ObjFound){
+  if (err) {
+    console.log(err);
+    res.status(500).send();
+  } else {
+    if (!ObjFound){
+      res.status(404).send();
+    } else {
+      //check for each property if it is sent then include it in the update
+      if (req.body.bugfix_description){
+        ObjFound.bugfix_description = req.body.bugfix_description;
+      }
+
+      ObjFound.save(function(err, updatedRec){
+        if (err) {
+          console.log(err);
+          res.status(500).send();
+        }else {
+         res.send(updatedRec);
+        }
+      });
+
+    }
+  }
+ })
+});
+
+app.put('/answer/:id', function(req, res){
+var id = req.params.id;
+Answer.findOne({_id: id},function(err, ObjFound){
+  if (err) {
+    console.log(err);
+    res.status(500).send();
+  } else {
+    if (!ObjFound){
+      res.status(404).send();
+    } else {
+      //check for each property if it is sent then include it in the update
+      if (req.body.votes){
+        ObjFound.votes = req.body.votes;
+      }
+      if (req.body.body_content){
+        ObjFound.body_content = req.body.body_content;
+      }
+
+      if (req.body.extraction_date){
+        ObjFound.extraction_date = req.body.extraction_date;
+      }
+
+      ObjFound.save(function(err, updatedRec){
+        if (err) {
+          console.log(err);
+          res.status(500).send();
+        }else {
+         res.send(updatedRec);
+        }
+      });
+
+    }
+  }
+ })
+});
+
+
+app.put('/code/:id', function(req, res){
+var id = req.params.id;
+Code.findOne({_id: id},function(err, ObjFound){
+  if (err) {
+    console.log(err);
+    res.status(500).send();
+  } else {
+    if (!ObjFound){
+      res.status(404).send();
+    } else {
+      //check for each property if it is sent then include it in the update
+      if (req.body.code_content){
+        ObjFound.code_content = req.body.code_content;
+      }
+      if (req.body.code_description){
+        ObjFound.code_description = req.body.code_description;
+      }
+      //programming_language
+      if (req.body.programming_language){
+        ObjFound.programming_language = req.body.programming_language;
+      }
+      ObjFound.save(function(err, updatedRec){
+        if (err) {
+          console.log(err);
+          res.status(500).send();
+        }else {
+         res.send(updatedRec);
+        }
+      });
+
+    }
+  }
+ })
+});
+
+app.put('/method/:id', function(req, res){
+var id = req.params.id;
+Method.findOne({_id: id},function(err, ObjFound){
+  if (err) {
+    console.log(err);
+    res.status(500).send();
+  } else {
+    if (!ObjFound){
+      res.status(404).send();
+    } else {
+      //check for each property if it is sent then include it in the update
+      if (req.body.method_name){
+        ObjFound.method_name = req.body.method_name;
+      }
+      if (req.body.method_description){
+        ObjFound.method_description = req.body.method_description;
+      }
+      ObjFound.save(function(err, updatedRec){
+        if (err) {
+          console.log(err);
+          res.status(500).send();
+        }else {
+         res.send(updatedRec);
+        }
+      });
+
+    }
+  }
+ })
 });
 
 

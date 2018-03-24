@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema, ObjectId = Schema.Types.ObjectId;
 
-
 // Questions
 var QuestionSchema = new Schema({
 question_id:String,
@@ -15,7 +14,6 @@ tags:[String],
 author:String,
 viewed: Number,
 api: [{type:ObjectId, ref:'API'}]
-
+//maybe add editor who update on contenet if needed?
 });
-
 module.exports = mongoose.model('Question', QuestionSchema);
