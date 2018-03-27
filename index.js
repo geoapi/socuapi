@@ -55,6 +55,7 @@ Answer.find({}).exec(function(err,answers){
 
 app.get('/apirecommendation', function(req,res){
 //res.send('ok');
+//TODO get all recommendations for a specific given API name or id
 APIRecommendation.find({}).exec(function(err,apire){
      if (err) { throw err;}
      else {res.json(apire)};
@@ -105,10 +106,38 @@ Code.find({}).exec(function(err,code){
 
 
 // Now turning to posting data
+//posting question
+app.post('/question/:id', function(req, res) {
+  //console.log(req.body);
+  var newQuestion = new Question({
+    question_id:req.params.id,
+    creation_date:Date.now(),
+    extraction_date:Date.now(),
+    title:req.body.title,
+    body:req.body.body_content,
+    author:req.body.author,
+    viewed: req.body.viewed
+  });
+  //question_id relation TODO;
+  //TODO bug_fix and api_recommendation
+  newAnswer.save(function(err, answer) {
+    if(err) {
+      res.send('error saving answer');
+    } else {
+      console.log(answer);
+      res.send(answer);
+    }
+  });
+});
+
+
 //Posting an API
 app.post('/api/', function(req, res) {
   var newAPI = new API({
-    api_name:req.body.api_name
+    api_name:req.body.api_name,
+    api_version:req.body.api_version,
+    api_description:req.body.api_description,
+    api_uri:req.body.api_uri
   });
 // TODO link related questions and related API methods
   newAPI.save(function(err, APIanswer) {
@@ -126,7 +155,8 @@ app.post('/api/', function(req, res) {
 app.post('/method/', function(req, res) {
   var newMethod = new Method({
     method_name: req.body.method_name,
-    method_description: req.body.method_description
+    method_description: req.body.method_description,
+    method_deprecation: req.body.method_deprecation
   });
 // TODO link related questions and related API methods
   newMethod.save(function(err, Methodanswer) {
@@ -158,8 +188,9 @@ app.post('/bug/', function(req, res) {
 });
 
 
+
 app.post('/answer/:id', function(req, res) {
-console.log(req.body);
+//console.log(req.body);
   var newAnswer = new Answer({
     answer_id:req.params.id,
     creation_date:Date.now(),
@@ -281,6 +312,16 @@ API.findOne({api_name: name},function(err, ObjFound){
       if (req.body.api_name){
         ObjFound.api_name = req.body.api_name;
       }
+      if (req.body.api_version){
+        ObjFound.api_version = req.body.api_version;
+      }
+      if (req.body.api_description){
+        ObjFound.api_description = req.body.api_description;
+      }
+      if (req.body.api_uri){
+        ObjFound.api_uri = req.body.api_uri;
+      }
+
       //Now finished updating records , it's time to save them!
       ObjFound.save(function(err, updatedRec){
         if (err) {
@@ -338,7 +379,6 @@ Question.findOne({_id: qid},function(err, ObjFound){
 
  })
 });
-
 
 app.put('/bug/:id', function(req, res){
 var id = req.params.id;
@@ -415,11 +455,9 @@ Answer.findOne({_id: id},function(err, ObjFound){
       if (req.body.body_content){
         ObjFound.body_content = req.body.body_content;
       }
-
       if (req.body.extraction_date){
         ObjFound.extraction_date = req.body.extraction_date;
       }
-
       ObjFound.save(function(err, updatedRec){
         if (err) {
           console.log(err);
@@ -428,7 +466,6 @@ Answer.findOne({_id: id},function(err, ObjFound){
          res.send(updatedRec);
         }
       });
-
     }
   }
  })
@@ -464,7 +501,6 @@ Code.findOne({_id: id},function(err, ObjFound){
          res.send(updatedRec);
         }
       });
-
     }
   }
  })
@@ -486,6 +522,9 @@ Method.findOne({_id: id},function(err, ObjFound){
       }
       if (req.body.method_description){
         ObjFound.method_description = req.body.method_description;
+      }
+      if (req.body.method_deprecation){
+        ObjFound.method_deprecation = req.body.method_deprecation;
       }
       ObjFound.save(function(err, updatedRec){
         if (err) {

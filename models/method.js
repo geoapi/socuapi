@@ -6,6 +6,7 @@ var MethodSchema = new Schema({
 method_name: String,
 api_id:{type:ObjectId, ref:'API'},
 method_description: String,
+method_deprecation:{type:Boolean, default:'false'},
 code_example: [{type:ObjectId, ref:'Code'}],
 //bugs : {type:ObjectId, ref:'BugSchema'},
 });
