@@ -71,6 +71,27 @@ paths:
         responses:
           405:
            description: "Invalid input"
+  /api/id/{id}:
+      delete:
+        tags:
+        - "api"
+        summary: "Delete an API"
+        description: ""
+        operationId: "Delete API"
+        consumes:
+        - "application/json"
+        produces:
+        - "application/json"
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "API id that needs to be deleted"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          404:
+            description: " object not found"
 
   /api/{api_name}:
       put:
