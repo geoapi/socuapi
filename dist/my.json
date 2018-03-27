@@ -1,0 +1,720 @@
+swagger: '2.0'
+info:
+  version: '1'
+  title: 'Stack Overflow Community Knowledge Curation API SoCuAPI'
+  description: 'SoCuAPI'
+# Added by API Auto Mocking Plugin
+# host: socuapi-geoapi.c9users.io
+# Added by API Auto Mocking Plugin
+# basePath: /
+# basePath: /geoapi/SOCU-API/1
+# schemes:
+#  - http
+# Current API is on C9
+host: socuapi-geoapi.c9users.io
+basePath: /
+
+schemes:
+ - https
+paths:
+  /api:
+      get:
+        tags:
+        - "api"
+        summary: "Get all APIs"
+        description: ""
+        operationId: "Get API"
+        consumes:
+        - "application/json"
+        produces:
+        - "application/json"
+        responses:
+          404:
+            description: "Not objects found"
+      post:
+        tags:
+        - "api"
+        summary: "Post an API"
+        description: ""
+        operationId: "PostAPI"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+
+        parameters:
+        - name: "api_name"
+          in: "path"
+          description: "API name that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "api_version"
+          in: "path"
+          description: "API version that needs to be posted"
+          required: true
+          type: "number"
+          format: "number"
+        - name: "api_description"
+          in: "path"
+          description: "API description that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "api_uri"
+          in: "path"
+          description: "API uri that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          405:
+           description: "Invalid input"
+
+  /api/{api_name}:
+      put:
+        tags:
+        - "api"
+        summary: "Update an API providing the name "
+        description: ""
+        operationId: "UpdateAPI"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "api_name"
+          in: "path"
+          description: "API name that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "api_version"
+          in: "path"
+          description: "API version that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "api_description"
+          in: "path"
+          description: "API description that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "api_uri"
+          in: "path"
+          description: "API URI that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          405:
+           description: "Invalid input"
+  /questions:
+      get:
+        tags:
+        - "questions"
+        summary: "Get all questions"
+        description: ""
+        operationId: "GetQuestions"
+        consumes:
+        - "application/json"
+        - "application/xml"
+        produces:
+        - "application/xml"
+        - "application/json"
+        responses:
+          404:
+            description: "No objects found"
+      post:
+        tags:
+        - "questions"
+        summary: "Post a question"
+        description: ""
+        operationId: "PostQuestion"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "question_id"
+          in: "path"
+          description: "ID of question that needs to be posted"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "title"
+          in: "path"
+          description: "Question title that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "body"
+          in: "path"
+          description: "Question body content that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "author"
+          in: "path"
+          description: "Question author that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "viewed"
+          in: "path"
+          description: "Question viewed count that needs to be posted"
+          required: true
+          type: "integer"
+          format: "int64"
+
+        - name: "creation_date"
+          in: "path"
+          description: "Question creation date that needs to be posted"
+          required: true
+          type: "number"
+          format: "number"
+        - name: "extraction_date"
+          in: "path"
+          description: "Question extraction date that needs to be posted, usually done automatically"
+          required: true
+          type: "number"
+          format: "number"
+        responses:
+          405:
+           description: "Invalid input"
+
+  /question/{qid}:
+      put:
+        tags:
+        - "questions"
+        summary: "Update question providing the id "
+        description: ""
+        operationId: "UpdateQuestion"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "qid"
+          in: "path"
+          description: "question id that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "body"
+          in: "path"
+          description: "question body content that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "title"
+          in: "path"
+          description: "question title that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "viewed"
+          in: "path"
+          description: "question viewed count that needs to be updated"
+          required: true
+          type: "number"
+          format: "number"
+        - name: "extraction_date"
+          in: "path"
+          description: "extraction date that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          405:
+           description: "Invalid input"
+
+  /answers:
+      get:
+        tags:
+        - "answers"
+        summary: "Get all answers"
+        description: ""
+        operationId: "GetAnswers"
+        consumes:
+        - "application/json"
+        - "application/xml"
+        produces:
+        - "application/xml"
+        - "application/json"
+        responses:
+          404:
+            description: "Not objects found"
+  /answer/{id}:
+      post:
+        tags:
+        - "answers"
+        summary: "Post an answer"
+        description: ""
+        operationId: "PostAnswer"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of answer to be posted"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "body_content"
+          in: "path"
+          description: "Answer body content that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "accepted"
+          in: "path"
+          description: "Answer acceptance"
+          required: true
+          type: "boolean"
+          format: "boolean"
+        - name: "votes"
+          in: "path"
+          description: "Answer current number of votes that needs to be posted"
+          required: true
+          type: "number"
+          format: "number"
+        - name: "creation_date"
+          in: "path"
+          description: "Answer creation date that needs to be posted"
+          required: true
+          type: "number"
+          format: "number"
+        - name: "extraction_date"
+          in: "path"
+          description: "Answer extraction date that needs to be posted, usually done automatically"
+          required: true
+          type: "number"
+          format: "number"
+        responses:
+          404:
+            description: "Not objects found"
+
+      put:
+        tags:
+        - "answers"
+        summary: "Update an answer providing the id "
+        description: ""
+        operationId: "UpdateAnswer"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "Answer id that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "body_content"
+          in: "path"
+          description: "answer body content that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "extraction_date"
+          in: "path"
+          description: "answer extraction date that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+
+        - name: "votes"
+          in: "path"
+          description: "answer votes that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          405:
+           description: "Invalid input"
+  /bugs:
+      get:
+        tags:
+        - "bugs"
+        summary: "Get all bugs"
+        description: ""
+        operationId: "GetBugs"
+        consumes:
+        - "application/json"
+        - "application/xml"
+        produces:
+        - "application/xml"
+        - "application/json"
+        responses:
+          404:
+            description: "Not objects found"
+  /bug/{id}:
+      put:
+        tags:
+        - "bugs"
+        summary: "Update bug providing the id "
+        description: ""
+        operationId: "UpdateBug"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "bug id that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "bug_description"
+          in: "path"
+          description: "bug description content that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          405:
+           description: "Invalid input"
+
+  /methods:
+      get:
+        tags:
+        - "methods"
+        summary: "Get all methods"
+        description: ""
+        operationId: "GetMethods"
+        consumes:
+        - "application/json"
+        - "application/xml"
+        produces:
+        - "application/xml"
+        - "application/json"
+        responses:
+          404:
+            description: "Not objects found"
+      post:
+        tags:
+        - "methods"
+        summary: "Post an API method details"
+        description: ""
+        operationId: "PostMethod"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "method_name"
+          in: "path"
+          description: "API method name that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "method_description"
+          in: "path"
+          description: "API method description that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "method_deprecation"
+          in: "path"
+          description: "API method deprecation status that needs to be posted"
+          required: true
+          type: "boolean"
+          format: "boolean"
+        responses:
+          405:
+           description: "Invalid input"
+  /method/{id}:
+      put:
+        tags:
+        - "methods"
+        summary: "Update method providing the id "
+        description: ""
+        operationId: "UpdateMethod"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "method id that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "method_name"
+          in: "path"
+          description: "method name that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "method_description"
+          in: "path"
+          description: "method description that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "method_deprecation"
+          in: "path"
+          description: "method deprecation boolean status that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          405:
+           description: "Invalid input"
+
+
+  /bugfixes:
+      get:
+        tags:
+        - "bugfixes"
+        summary: "Get all bug fixes"
+        description: ""
+        operationId: "GetBugFixes"
+        consumes:
+        - "application/json"
+        - "application/xml"
+        produces:
+        - "application/xml"
+        - "application/json"
+        responses:
+          404:
+            description: "Not objects found"
+      post:
+        tags:
+        - "bugfixes"
+        summary: "Post a bug fix details"
+        description: ""
+        operationId: "PostBugFix"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "bugfix_description"
+          in: "path"
+          description: "Big fixe content that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          405:
+           description: "Invalid input"
+
+  /bugfixes/{id}:
+      put:
+        tags:
+        - "bugfixes"
+        summary: "Update bugfix providing the id "
+        description: ""
+        operationId: "UpdateBugFix"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "bugfix id that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "bugfix_description"
+          in: "path"
+          description: "bug fix description content that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          405:
+           description: "Invalid input"
+
+  /code:
+      get:
+        tags:
+        - "code"
+        summary: "Get all code fragments"
+        description: ""
+        operationId: "GetCode"
+        consumes:
+        - "application/json"
+        - "application/xml"
+        produces:
+        - "application/xml"
+        - "application/json"
+        responses:
+          404:
+            description: "Not objects found"
+
+      post:
+        tags:
+        - "code"
+        summary: "Post code details"
+        description: ""
+        operationId: "PostCode"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "code_content"
+          in: "path"
+          description: "Code content that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "code_description"
+          in: "path"
+          description: "Code description that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "programming_language"
+          in: "path"
+          description: "Programming language that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          405:
+           description: "Invalid input"
+
+  /code/{id}:
+      put:
+        tags:
+        - "code"
+        summary: "Update code providing the id "
+        description: ""
+        operationId: "UpdateCode"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "code id that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "code_content"
+          in: "path"
+          description: "code content that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "code_description"
+          in: "path"
+          description: "code description content that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "programming_language"
+          in: "path"
+          description: "programming language that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          405:
+           description: "Invalid input"
+
+  /apirecommendation:
+      get:
+        tags:
+        - "api recommendation"
+        summary: "Get all API recommendation"
+        description: ""
+        operationId: "Get API Recommendation"
+        consumes:
+        - "application/json"
+        - "application/xml"
+        produces:
+        - "application/xml"
+        - "application/json"
+        responses:
+          404:
+            description: "Not objects found"
+      post:
+        tags:
+        - "api recommendation"
+        summary: "Post an API"
+        description: ""
+        operationId: "Post API Recommendation"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+
+        parameters:
+        - name: "apirecommendation_description"
+          in: "path"
+          description: "API recommendation description that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "apirecommendation_type"
+          in: "path"
+          description: "API recommendation type that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          405:
+           description: "Invalid input"
+
+  /apirecommendation/{id}:
+      put:
+        tags:
+        - "api recommendation"
+        summary: "Update an API"
+        description: ""
+        operationId: "Update API Recommendation"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of api recommendation to be updated"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "apirecommendation_description"
+          in: "path"
+          description: "API recommendation description that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "apirecommendation_type"
+          in: "path"
+          description: "API recommendation type that needs to be posted"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          405:
+           description: "Invalid input"
