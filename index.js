@@ -336,6 +336,75 @@ API.findOne({api_name: name},function(err, ObjFound){
  })
 });
 
+
+//updating an API by the ID
+
+app.put('/api/id/:id', function(req, res){
+var id = req.params.id;
+API.findOne({_id: id},function(err, ObjFound){
+  if (err) {
+    console.log(err);
+    res.status(500).send();
+  } else {
+    if (!ObjFound){
+      res.status(404).send();
+    } else {
+      //check for each property if it is sent then include it in the update
+      if (req.body.api_name){
+        ObjFound.api_name = req.body.api_name;
+      }
+      if (req.body.api_version){
+        ObjFound.api_version = req.body.api_version;
+      }
+      if (req.body.api_description){
+        ObjFound.api_description = req.body.api_description;
+      }
+      if (req.body.api_uri){
+        ObjFound.api_uri = req.body.api_uri;
+      }
+
+      //Now finished updating records , it's time to save them!
+      ObjFound.save(function(err, updatedRec){
+        if (err) {
+          console.log(err);
+          res.status(500).send();
+        }else {
+         res.send(updatedRec);
+        }
+      });
+    }
+  }
+ })
+});
+
+//deleting an API
+
+app.delete('/api/id/:id', function(req, res){
+var id = req.params.id;
+API.findOne({_id: id},function(err, ObjFound){
+  if (err) {
+    console.log(err);
+    res.status(500).send();
+  } else {
+    if (!ObjFound){
+      res.status(404).send();
+    } else {
+      //Now delete the object , it's time to move on!
+      API.remove({_id: ObjFound._id}, function(err, result){
+        if (err){ res.send(err)}
+        else
+        {
+          res.send(result);
+        }
+      });
+    }
+  }
+ })
+});
+
+
+
+
 //updating Question body content
 //e.g. http://localhost:8080/questions/5aaf5ceb39b715d61369bfee and send also body key with updated content
 app.put('/question/:qid', function(req, res){
