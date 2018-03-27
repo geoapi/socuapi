@@ -120,12 +120,12 @@ app.post('/question/:id', function(req, res) {
   });
   //question_id relation TODO;
   //TODO bug_fix and api_recommendation
-  newAnswer.save(function(err, answer) {
+  newQuestion.save(function(err, question) {
     if(err) {
-      res.send('error saving answer');
+      res.send('error saving quesiton');
     } else {
-      console.log(answer);
-      res.send(answer);
+      console.log(question);
+      res.send(question);
     }
   });
 });
