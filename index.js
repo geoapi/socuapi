@@ -91,6 +91,14 @@ API.find({}).exec(function(err,apir){
      });
 });
 
+app.get('/api/:id', function(req,res){
+//console.log('ididididididididiok');
+API.find({_id:req.params.id}).exec(function(err,apir){
+     if (err) { throw err;}
+     else {res.json(apir)};
+     });
+});
+
 app.get('/bugfixes', function(req,res){
 //res.send('ok');
 BugFix.find({}).exec(function(err,bugfix){
