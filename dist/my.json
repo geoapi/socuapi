@@ -31,6 +31,9 @@ paths:
         responses:
           404:
             description: "Not objects found"
+          200:
+            description: "Objects found"
+
       post:
         tags:
         - "api"
@@ -71,28 +74,6 @@ paths:
         responses:
           405:
            description: "Invalid input"
-  /api/id/{id}:
-      delete:
-        tags:
-        - "api"
-        summary: "Delete an API"
-        description: ""
-        operationId: "Delete API"
-        consumes:
-        - "application/json"
-        produces:
-        - "application/json"
-        parameters:
-        - name: "id"
-          in: "path"
-          description: "API id that needs to be deleted"
-          required: true
-          type: "string"
-          format: "string"
-        responses:
-          404:
-            description: " object not found"
-
   /api/{api_name}:
       put:
         tags:
@@ -133,6 +114,74 @@ paths:
         responses:
           405:
            description: "Invalid input"
+
+  /api/id/{id}:
+      put:
+        tags:
+        - "api"
+        summary: "Update, providing the id of an existing API "
+        description: ""
+        operationId: "UpdateAPIbyID"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "question id that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "api_name"
+          in: "path"
+          description: "API name that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "api_version"
+          in: "path"
+          description: "API version that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "api_description"
+          in: "path"
+          description: "API description that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        - name: "api_uri"
+          in: "path"
+          description: "API URI that needs to be updated"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          405:
+           description: "Invalid input"
+      delete:
+        tags:
+        - "api"
+        summary: "Delete an API"
+        description: ""
+        operationId: "Delete API"
+        consumes:
+        - "application/json"
+        produces:
+        - "application/json"
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "API id that needs to be deleted"
+          required: true
+          type: "string"
+          format: "string"
+        responses:
+          404:
+            description: " object not found"
+
   /questions:
       get:
         tags:
@@ -320,6 +369,12 @@ paths:
           required: true
           type: "number"
           format: "number"
+        - name: "author"
+          in: "path"
+          description: "author of the answer name"
+          required: true
+          type: "string"
+          format: "string"
         responses:
           404:
             description: "Not objects found"
@@ -354,7 +409,12 @@ paths:
           required: true
           type: "string"
           format: "string"
-
+        - name: "author"
+          in: "path"
+          description: "author of the answer name"
+          required: true
+          type: "string"
+          format: "string"
         - name: "votes"
           in: "path"
           description: "answer votes that needs to be updated"
@@ -377,6 +437,28 @@ paths:
         produces:
         - "application/xml"
         - "application/json"
+        responses:
+          404:
+            description: "Not objects found"
+  /bug/:
+      post:
+        tags:
+        - "bugs"
+        summary: "Post a bug"
+        description: ""
+        operationId: "PostBug"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "bug_description"
+          in: "path"
+          description: "bug description to be posted"
+          required: true
+          type: "string"
+          format: "string"
         responses:
           404:
             description: "Not objects found"

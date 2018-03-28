@@ -209,7 +209,8 @@ app.post('/answer/:id', function(req, res) {
     extraction_date:Date.now(),
     body_content:req.body.body_content,
     accepted:req.body.accepted,
-    votes: req.body.votes
+    votes: req.body.votes,
+    author:req.body.author
   });
 //question_id relation TODO;
 //TODO bug_fix and api_recommendation
@@ -539,6 +540,10 @@ Answer.findOne({_id: id},function(err, ObjFound){
       if (req.body.extraction_date){
         ObjFound.extraction_date = req.body.extraction_date;
       }
+      if (req.body.author){
+        ObjFound.author = req.body.author;
+      }
+      
       ObjFound.save(function(err, updatedRec){
         if (err) {
           console.log(err);
