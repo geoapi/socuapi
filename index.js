@@ -35,7 +35,7 @@ fs.readdirSync(models_dir).forEach(function(model){
  }
 });
 **/
-
+//Redirection to the documentation 
 app.get('/', function(req,res){
 res.send('visit the API documentation at https://app.swaggerhub.com/apis/geoapi/SOCK-API/1');
 });
